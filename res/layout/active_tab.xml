@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/active_tab"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal" >
+	
+    <!-- Adds the list to the view -->
+    <ListView
+        android:id="@+id/active_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/add_button"
+        android:layout_alignParentLeft="true" 
+        android:layout_alignParentTop="true" />
+    
+    <!-- Adds the bar where the user inputs an item for the to-do list -->
+    <EditText
+        android:id="@+id/add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_toLeftOf="@+id/add_button"
+        android:hint="@string/add_msg" />
+    
+    <!-- Adds the button to add the user input onto the list -->
+    <Button 
+        android:id="@+id/add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+     	android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add_item_button"
+        android:onClick="addItem" />
+
+</RelativeLayout>

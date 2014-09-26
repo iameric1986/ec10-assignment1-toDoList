@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ec10-notes</string>
+    <string name="title_section1">Active</string>
+    <string name="title_section2">Archived</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_active_tab">ActiveTab</string>
+    <string name="address">Enter recipient e-mail address</string>
+    <string name="add_msg">Enter an item to add</string>
+    <string name="add_item_button">Add</string>
+    <string name="title_activity_archive_tab">ArchiveTab</string>
+    <string name="title_activity_active_list">ActiveList</string>
+    <string name="title_activity_checkbox_listener">CheckboxListener</string>
+    <string name="viewArchive">View Archive</string>
+    <string name="title_activity_archive">ec10-notes</string>
+    <string name="title_activity_email">Email</string>
+    <string name="send_button">Send</string>
+    <string name="subject">Enter e-mail subject</string>
+
+</resources>

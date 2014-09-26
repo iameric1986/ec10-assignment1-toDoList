@@ -1,0 +1,220 @@
+===============================================
+=          Computer Science 301               =
+=   Assignemnt: 1 -- To Do List Android App   =
+=       Professor: Dr. Abram Hindle           =
+=           Student: Eric Cheng               =
+===============================================
+
+==========================================================================================================================
+Table of Contents
+==========================================================================================================================
+1. Overview
+2. Design - User Level
+3. Design - Software Level
+4. Other Functionality
+5. Known Bugs And Issues
+6. Credit And Sources
+
+==========================================================================================================================
+Overview
+==========================================================================================================================
+The purpose of this assignment was to become familiarized with techniques and concepts that relate to object-oriented
+software design.  In addition, it introduces object-oriented documentation in UML, design processes, and standard software
+engineering practices.  To accomplish these goals, this assignment calls for designing and implementing a fairly simple
+to-do list application for the Android platform.
+
+The requirements are as follows (taken from the eclass page).  Most recent access of application specs: Sept. 23,2014
+
+The app will allow for:
+-Adding or removing of TODO items (text provided by the user)
+-Checking TODO items off ( [  ] TODO: Get Kale -> [X] TODO: Get Kale )
+-Selecting and archiving TODO items
+-Browsing visible and archived TODO items
+-Emailing via an intent selected TODO items (including archived options)
+-Ability to email ALL TODO items.
+
+Application must be persistent -- that is, the to-do and archived  to-do lists must be saved.
+
+The user must be able to:
+-view TODO Items
+-Check TODO items
+-Un-check TODO items
+-Archive TODO Items
+-Unarchive TODO items
+-view archived TODO items
+-Email TODO items
+-Email a selection of TODO Items
+-Email a selection of archived TODO Items
+-Email all TODO items including archived.
+-remove a TODO item
+-remove an archived TODO item
+-Summarize
+--total number of TODO items checked
+--total number of TODO items left unchecked
+--total number of archived TODO items
+---total number of checked archived TODO items
+---total number of unchecked archived TODO items
+-always save and load the TODO items automatically for the user
+
+==========================================================================================================================
+Design - User Level
+==========================================================================================================================
+The application is designed to use two activities that display a UI to allow the user to interact with the lists.  The
+UI uses a mix of menu icons and menu options for access to functionality.
+
+Active List Screen.
+This is the main screen that appears upon launching the application.  The text editor allows the user to input a string,
+and the "Add" button to the left will put the string into the active to-do list.  The items on the to do list have a
+check box that the user can click on to mark an item as complete/select an item, or to unmark an item/unselect an item.
+
+The top of the parent screen contains the icon menu.  From right to left, they are:
+-Folder icon: Archive selected items.
+-Trash can: Delete selected items.
+-Mail envelope: E-mail selected items.
+** CLARIFICATION: "Selected item(s)" is denoted as any item that has it's check box selected  (has a check mark in it).
+
+The overflow menu contains the following:
+-Clear all.  Deletes all entires, regardless of selection.
+-Archive all. Sends all entries to the archive, regardless of selection.
+-E-mail all.  E-mails all entries, regardless of selection.
+-View archive.  Switches view to archive.
+-View stats.  Returns the number of unchecked, checked and total entries as a toast.
+
+Archive List Screen.
+This is the archive screen where the user can archive desired entries for viewing at a later date.  As with the active list
+screen, the items have a check box that a user can click on to select/mark an ite, or unselect/unmark an item.
+** LIMITATION: Only the check box is interactive.  Clicking on the text view will not do anything. (**FIXED: Sept 23, 2014)
+
+The top of the parent screen contains the icon menu.  From right to left, they are:
+-List icon. Unarchive selected items (send them back to the active list view).
+-Trash can: Delete selected items.
+-Mail envelope: E-mail selected items.
+** CLARIFICATION: "Selected item(s)" is denoted as any item that has it's check box selected  (has a check mark in it).
+
+The overflow menu contains the following:
+-Clear all.  Deletes all entires, regardless of selection.
+-Archive all. Sends all entries to the archive, regardless of selection.
+-E-mail all.  E-mails all entries, regardless of selection.
+-View stats.  Returns the number of unchecked, checked and total entries as a toast.
+** To navigate back to the active list view, use the back button on the Android device.  Reasoning for this design decision
+is that adding the functionality to go back would be redundant as the Android device and the API already offers the user 
+that functionality.
+
+==========================================================================================================================
+Design - Software Level
+==========================================================================================================================
+This is a brief description of what each class.  The MainActivity.java and Archive.java are left out
+because they simply allow for user interact with the blocks of code that performs all the work. 
+
+--------------------------------------------------------------------------------------------------------------------------
+ListCommunicator.java
+--------------------------------------------------------------------------------------------------------------------------
+Allows the UI to interact with the lists and their methods.  The ListCommunicator provides access to each list and
+performs all the work in regards to manipulating data within each list.  It is also responsible for telling the app when
+to load and when to save.
+
+--------------------------------------------------------------------------------------------------------------------------
+ListReader.java
+--------------------------------------------------------------------------------------------------------------------------
+This class facilitates interactions with the data that does not cause the data to change (ie. deleted, moved, added).
+The ListReader performs all operations in which the data is simply read or copied, in this case, it is used for the
+counter and for sending emails.
+
+--------------------------------------------------------------------------------------------------------------------------
+ActiveListManager.java and ArchiveListManager.java
+--------------------------------------------------------------------------------------------------------------------------
+Used to give each list persistant state.
+
+**DECREPITATE: As of Sept 25, 2014.  This no longer has any function/interacts with the program.  Entire code is commented
+out,  but is mentioned  for documentation sake.
+
+--------------------------------------------------------------------------------------------------------------------------
+ActiveList.java and ArchiveList.java
+--------------------------------------------------------------------------------------------------------------------------
+These objects are used to hold the ArrayLists of toDoItem and provides the functionality for simple operations (deletion,
+addition, and transferring).  They take the information processed by the ListCommunicator to perform their functions.
+
+--------------------------------------------------------------------------------------------------------------------------
+CheckboxListener.java
+--------------------------------------------------------------------------------------------------------------------------
+This method implements the viewable toDoItem by placing a TextView and a CheckBox into an object called a ViewHolder.
+The check box functionality is implemented here, and it's position on the screen is determined by the position of the
+ViewHolder.  The TextView's position is also set this way.  Allows for onClick interaction.
+
+**DECREPITATE: As of Sept 23, 2014.  This no longer has any function/interacts with the program.  Entire code is commented
+out, but is mentioned for documentation sake.
+
+--------------------------------------------------------------------------------------------------------------------------
+toDoItem.java
+--------------------------------------------------------------------------------------------------------------------------
+The to-do string is saved as an object.  The string can be extracted using the methods in this class.  The object can also
+be set to selected==true or selected==false
+
+--------------------------------------------------------------------------------------------------------------------------
+Listener.java
+--------------------------------------------------------------------------------------------------------------------------
+An interface for updating the listeners.  Credit: Dr. Abram Hindle
+
+--------------------------------------------------------------------------------------------------------------------------
+ListManager.java
+--------------------------------------------------------------------------------------------------------------------------
+This class is responsible for saving and loading both lists.  The stylization is inspired by Dr. Abram Hindle but the bulk
+of the work done by this class is performed using Gson, which was taught in the CMPUT301 lab.
+
+==========================================================================================================================
+Other Functionality
+==========================================================================================================================
+A string checker is implemented that does the follow:
+-If the user tries to add an item to the list that is already on the active list, the application will not allow them to
+ do it.  Instead, a toast will pop up and inform them that the task they are attempting to enter is not completed yet.
+-If the user tries to add an item to the list that is in the archive list, the application will move the item from the
+ archive to the active list.
+-This function is case-insensitive.  For example "Wash car" and "waSh CaR" will work for both stated functions.
+-This function only works for EXACT MATCHES.  For example if "Buy milk" and "Get milk" will not trigger any of the above
+ functions.
+
+==========================================================================================================================
+Known Bugs And Issues
+==========================================================================================================================
+- Cannot check off an item by clicking on the text portion of the item.  
+**FIXED: Completely re-implemented how the lists  and the items within the lists are is displayed. The CheckboxListener is
+ no longer used to create the view for the to-do list (See Design - Software Level).  The ListView is set to CHOICE_MODE_
+MULTIPLE and a built in android layout is used to show the check boxes instead.
+
+- When a new item is added to the active list, any items that are checked off will be unchecked, but will still be flagged
+as selected.  
+**FIXED: Changed the code so that the ListView does not recieve a .clearChoices() message when adding a new
+item
+
+- Occasionally, the text in the active list will not show properly when an item is move from the archive list back to the
+active list.  Example:
+My string may appear is My str  when moving from the archive list back to the active list.
+			ing
+**UPDATE: I have not be able to reliably reproduce the bug; therefore I cannot find out where it is occurring.  This bug
+happens more often on my phone; I have only ran into it once on the emulator.  It maybe an issue with the actual layout
+that the ListView uses; if that is the case, I do not want to mess with that chunk of code.  I am not completely sure if
+this is the cause of the bug.
+
+- The ListView was not saving the check marks upon exiting or closing the program.  The application remembers the selected
+state of the toDoItem inside the lists, but the check marks did not correspond correctly upon re-opening the app (all
+check marks are destroyed upon re-launching/re-opening).
+**FIXED: Implemented a method  that initializes the ListView to correctly correspond to the selected state of the toDoItem 
+
+==========================================================================================================================
+Credit And Sources
+==========================================================================================================================
+Credit to: Dr. Abram Hindle
+Source: http://www.youtube.com/user/abramh666
+Saving, loading and listener design has stylization similar to those used by Dr. Abram Hindle in his YouTube tutorials.
+I changed from the persistent state implementation that he employed to the method taught in the CMPUT301 lab using the
+Gson library.
+
+Credited to: fiXedd.
+Source:
+http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application/12804063#12804063
+The line of code was obtained on Sept. 22, 2014.
+This line of code is: <var_name>.setType("message/rfc822"); which gives more specific detail about what type of message
+the Intent object is sending.
+
+The remaining material is copyright of Eric Cheng under GPL-3 (See LICENSE).
+

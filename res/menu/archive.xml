@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ec10.assign1toDoList.Archive" >
+    
+    <item android:id="@+id/emailArchive"
+        android:onClick="emailArchive"
+        android:title="Email (Archive)"
+        android:icon="@drawable/ic_action_email"
+        android:showAsAction="always"></item>
+    
+    <item android:id="@+id/deleteFromArchive" 
+        android:onClick="deleteFromArchive" 
+        android:title="Delete"
+        android:icon="@drawable/ic_action_discard"
+        android:showAsAction="always"></item>
+    
+    <item android:id="@+id/moveToActive"
+        android:onClick="returnToActive"
+        android:title="Unarchive"
+        android:icon="@drawable/ic_action_view_as_list"
+        android:showAsAction="always"></item>
+    
+    <item android:id="@+id/deleteAllFromArchive"
+        android:onClick="deleteAllFromArchive"
+        android:title="Delete All"></item>
+    
+    <item android:id="@+id/emailAllArchive"
+        android:onClick="emailAllArchive"
+        android:title="E-mail All"></item>
+    
+    <item android:id="@+id/moveAllToActive"
+        android:onClick="returnAllToActive"
+        android:title="Unarchive All"></item>
+    
+    <item android:id="@+id/archiveStats"
+        android:onClick="checkStats"
+        android:title="View Stats"></item>
+
+</menu>

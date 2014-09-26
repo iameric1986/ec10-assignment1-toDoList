@@ -1,0 +1,44 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.ec10.assign1toDoList.MainActivity" >
+   
+    <item android:id="@+id/active_email"
+        android:title="Email (Selected)"
+        android:icon="@drawable/ic_action_email"
+        android:showAsAction="always"
+        android:onClick="email"></item>
+    
+    <item android:id="@+id/deleteActive" 
+        android:title="Delete (Selected)"
+        android:icon="@drawable/ic_action_discard"
+        android:showAsAction="always" 
+        android:onClick="deleteActive"></item>
+    
+    <item android:id="@+id/moveToArchive" 
+        android:title="viewArchve" 
+        android:icon="@drawable/ic_action_collection" 
+        android:showAsAction="always" 
+        android:onClick="moveToArchive"></item>
+    
+    <item android:id="@+id/deleteAllActive" 
+        android:onClick="delAll" 
+        android:title="Clear All"></item>
+    
+    <item android:id="@+id/archiveAll" 
+        android:onClick="archiveAll"
+        android:title="Archive all"></item>
+    
+    <item android:id="@+id/emailAll"
+         android:title="E-mail All" 
+         android:onClick="emailAll"></item>
+    
+    <item android:id="@+id/screenSwitch1" 
+        android:title="View Archive"
+        android:onClick="switchScreen"></item>
+    
+    <item android:id="@+id/stats" 
+        android:title="View Stats"
+        android:onClick="checkStats"></item>
+    
+ 
+</menu>
