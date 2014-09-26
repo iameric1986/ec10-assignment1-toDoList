@@ -21,13 +21,13 @@ import java.util.ArrayList;
 
 
 public class ListCommunicator {
-	private static ActiveList activeList = null;
-	private static ArchiveList archiveList = null;
+	private static ListModel activeList = null;
+	private static ListModel archiveList = null;
 	
 	// Throws a runTimeException.
-	public static ActiveList getActiveList() {
+	public static ListModel getActiveList() {
 		if (activeList == null) {
-			activeList = new ActiveList();
+			activeList = new ListModel();
 			activeList.addListener(new Listener() {
 				@Override
 				public void update() {
@@ -38,9 +38,9 @@ public class ListCommunicator {
 		return activeList;
 	}
 	
-	public static ArchiveList getArchiveList() {
+	public static ListModel getArchiveList() {
 		if (archiveList == null) {
-			archiveList = new ArchiveList();
+			archiveList = new ListModel();
 			archiveList.addListener(new Listener() {
 				@Override
 				public void update() {
@@ -120,7 +120,7 @@ public class ListCommunicator {
 		for (int j = 0; j <moveList.size(); j++) {
 			moveList.get(j).setSelected(false);
 			if (k==0) {
-				getArchiveList().addToArchive(moveList.get(j));
+				getArchiveList().addToDo(moveList.get(j));
 				getActiveList().removeToDo(moveList.get(j));
 			}
 			if (k==1) {
@@ -145,7 +145,7 @@ public class ListCommunicator {
 		for (int j = 0; j < moveAllList.size(); j++) {
 			moveAllList.get(j).setSelected(false);
 			if (k==0) {
-				getArchiveList().addToArchive(moveAllList.get(j));
+				getArchiveList().addToDo(moveAllList.get(j));
 				getActiveList().removeToDo(moveAllList.get(j));
 			}
 			if (k==1) {

@@ -218,15 +218,12 @@ Saving, loading and listener design has stylization similar to those used by Dr.
 I changed from the persistent state implementation that he employed to the method taught in the CMPUT301 lab using the
 Gson library.
 
-Credit to: fiXedd.
+Credited to: fiXedd.
 Source:
 http://stackoverflow.com/questions/2197741/how-can-i-send-emails-from-my-android-application/12804063#12804063
 The line of code was obtained on Sept. 22, 2014.
 This line of code is: <var_name>.setType("message/rfc822"); which gives more specific detail about what type of message
 the Intent object is sending.
-
-Credit to: Ruby de Jesus
-Pointed out that having two list object is redundant.
 
 The remaining material is copyright of Eric Cheng under GPL-3 (See LICENSE).
 
